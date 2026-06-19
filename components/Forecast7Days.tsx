@@ -1,11 +1,11 @@
-import { getForecast } from "@/lib/weather";
+import { getHourlyForecast } from "@/lib/weather";
 
 interface Props {
   city: string;
 }
 
 export default async function Forecast7Days({ city }: Props) {
-  const Forecast = await getForecast(city);
+  const Forecast = await getHourlyForecast(city);
 
   return (
     <div className="mt-8 rounded-3xl bg-white/20 p-6 backdrop-blur-lg text-white shadow-2xl">

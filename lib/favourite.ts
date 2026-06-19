@@ -1,4 +1,4 @@
-export function getFavorites() {
+export function getFavorite() {
   if (typeof window === "undefined") {
     return [];
   }
@@ -15,7 +15,7 @@ export function saveFavorite(
   city: string
 ) {
   const favorites =
-    getFavorites();
+    getFavorite();
 
   if (!favorites.includes(city)) {
     favorites.push(city);
@@ -31,7 +31,7 @@ export function removeFavorite(
   city: string
 ) {
   const favorites =
-    getFavorites().filter(
+    getFavorite().filter(
       (item: string) =>
         item !== city
     );

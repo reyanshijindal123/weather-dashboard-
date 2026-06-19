@@ -7,9 +7,19 @@ export default function SearchBar() {
   const [city, setCity] = useState("");
 
   const router = useRouter();
-
   const handleSearch = () => {
     if (!city.trim()) return;
+
+    const history = JSON.parse(localStorage.getItem("searchHistory") || "[]");
+
+    const updatedHistory = [
+      city,
+      ...history.filter(
+        (item: string) => item.toLowerCase() !== city.toLowerCase(),
+      ),
+    ].slice(0, 5);
+
+    localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
 
     router.push(`/weather/${city}`);
   };

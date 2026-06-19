@@ -1,0 +1,67 @@
+import { getHourlyForecast } from "@/lib/weather";
+
+interface Props {
+  city: string;
+}
+
+export default async function HourlyForecast({
+  city,
+}: Props) {
+  const forecast =
+    await getHourlyForecast(city);
+
+  return (
+    <div className="mt-8 rounded-3xl bg-white/15 border border-white/20 backdrop-blur-xl p-6 text-white shadow-2xl hover:scale-[1.02] transition-all duration-300">
+
+      <h2 className="mb-4 text-2xl font-bold">
+        Hourly Forecast
+      </h2>
+
+      <div className="flex gap-4 overflow-x-auto">
+
+        {forecast.map(
+          (hour: any) => (
+            <div
+              key={hour.dt}
+              className="
+min-w-[100px]
+rounded-2xl
+bg-white/10
+backdrop-blur-lg
+border
+border-white/10
+p-4
+text-center
+"
+            >
+              <p>
+                {new Date(
+                  hour.dt * 1000
+                ).toLocaleTimeString(
+                  [],
+                  {
+                    hour: "numeric",
+                  }
+                )}
+              </p>
+
+              <img
+                src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}.png`}
+                alt=""
+                className="mx-auto"
+              />
+
+              <p className="font-bold">
+                {Math.round(
+                  hour.main.temp
+                )}
+                °
+              </p>
+            </div>
+          )
+        )}
+
+      </div>
+    </div>
+  );
+}
