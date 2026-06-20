@@ -20,8 +20,9 @@ export async function getWeather(
       "Failed to fetch weather"
     );
   }
-
   const data = await response.json();
+  console.log(data)
+  
 
   return {
     city: data.name,
@@ -56,6 +57,8 @@ export async function getHourlyForecast(
   }
 
   const data = await response.json();
+
+  console.log(data)
 
   return data.list.slice(0, 8);
 }

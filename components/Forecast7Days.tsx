@@ -25,7 +25,11 @@ export default async function Forecast7Days({ city }: Props) {
             <div key={day.dt} className="flex items-center justify-between">
               <p>
                 {new Date(day.dt * 1000).toLocaleDateString("en-US", {
+                  day : '2-digit',
+                  month: '2-digit',
                   weekday: "long",
+                  hour : '2-digit',
+                  minute : '2-digit',
                 })}
               </p>
 

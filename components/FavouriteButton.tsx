@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { saveFavorite, removeFavorite } from "@/lib/favourite";
+import { saveFavorite, removeFavorite } from "@/lib/favorite";
 interface Props {
   city: string;
 }
