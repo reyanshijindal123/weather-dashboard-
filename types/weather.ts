@@ -6,6 +6,10 @@ export interface WeatherData {
   windSpeed: number;
   feelsLike:number;
   icon: string;
+  sunrise: number;
+  sunset: number;
+  pressure: number;
+  visibility: number;
 }
 
 

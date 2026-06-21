@@ -23,17 +23,9 @@ export default async function HourlyForecast({
           (hour: any) => (
             <div
               key={hour.dt}
-              className="
-min-w-[100px]
-rounded-2xl
-bg-white/10
-backdrop-blur-lg
-border
-border-white/10
-p-4
-text-center
-"
-            >
+              className="min-w[120px] rounded-3xl bg-white/15 backdrop-blur-lg border border-white/20 p-5 text-center hover:scale-105 transition-all duration-300">
+
+            
               <p>
                 {new Date(
                   hour.dt * 1000

@@ -2,6 +2,8 @@ import { WeatherData } from "@/types/weather";
 
 export async function getWeather(
   city: string
+  
+
 ): Promise<WeatherData> {
   const apiKey =
     process.env.OPENWEATHER_API_KEY;
@@ -32,6 +34,10 @@ export async function getWeather(
     windSpeed: data.wind.speed,
     feelsLike:data.main.feels_like,
     icon: data.weather[0].icon,
+    sunrise: data.sys.sunrise,
+    sunset: data.sys.sunset,
+    pressure: data.main.pressure,
+    visibility: data.visibility / 1000,
   };
 }
 

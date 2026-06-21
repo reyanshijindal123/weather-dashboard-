@@ -25,7 +25,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="rounded-3xl bg-white/20 p-6 backdrop-blur-lg shadow-xl">
+    <div className="rounded-[32px] bg-white/10 backdrop-blur-xl border border-white/20 p-6 shadow-2xl">
       <input
         type="text"
         placeholder="Search city..."
@@ -36,7 +36,7 @@ export default function SearchBar() {
             handleSearch();
           }
         }}
-        className="w-full rounded-xl bg-white p-4 text-black outline-none"
+        className="w-full rounded-2xl bg-white/80 p-5 text-lg text-black outline-none"
       />
 
       <button
