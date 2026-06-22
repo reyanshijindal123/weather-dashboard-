@@ -1,5 +1,5 @@
 import { getHourlyForecast } from "@/lib/weather";
-
+import { formatTime } from "@/app/helpers/date-helper";
 interface Props {
   city: string;
 }
@@ -23,18 +23,11 @@ export default async function HourlyForecast({
           (hour: any) => (
             <div
               key={hour.dt}
-              className="min-w[120px] rounded-3xl bg-white/15 backdrop-blur-lg border border-white/20 p-5 text-center hover:scale-105 transition-all duration-300">
+              className="min-w-[120px] rounded-3xl bg-white/15 backdrop-blur-lg border border-white/20 p-5 text-center hover:scale-105 transition-all duration-300">
 
             
               <p>
-                {new Date(
-                  hour.dt * 1000
-                ).toLocaleTimeString(
-                  [],
-                  {
-                    hour: "numeric",
-                  }
-                )}
+                {formatTime(hour.dt)}
               </p>
 
               <img

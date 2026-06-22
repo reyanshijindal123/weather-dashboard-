@@ -1,9 +1,8 @@
 import { WeatherData } from "@/types/weather";
-
+import {getDailyForecast,} from "@/app/helpers/weather-helper";
+import { transformWeatherData } from "@/app/helpers/weather-helper";
 export async function getWeather(
   city: string
-  
-
 ): Promise<WeatherData> {
   const apiKey =
     process.env.OPENWEATHER_API_KEY;
@@ -22,23 +21,10 @@ export async function getWeather(
       "Failed to fetch weather"
     );
   }
-  const data = await response.json();
-  console.log(data)
-  
 
-  return {
-    city: data.name,
-    temperature: data.main.temp,
-    description:data.weather[0].description,
-    humidity: data.main.humidity,
-    windSpeed: data.wind.speed,
-    feelsLike:data.main.feels_like,
-    icon: data.weather[0].icon,
-    sunrise: data.sys.sunrise,
-    sunset: data.sys.sunset,
-    pressure: data.main.pressure,
-    visibility: data.visibility / 1000,
-  };
+  const data = await response.json();
+
+  return transformWeatherData(data);
 }
 
 export async function getHourlyForecast(
@@ -63,8 +49,6 @@ export async function getHourlyForecast(
   }
 
   const data = await response.json();
-
-  console.log(data)
 
   return data.list.slice(0, 8);
 }
@@ -92,15 +76,5 @@ export async function getForecast(
 
   const data = await response.json();
 
-  const dailyData =
-    data.list.filter(
-      (item: {
-        dt_txt: string;
-      }) =>
-        item.dt_txt.includes(
-          "12:00:00"
-        )
-    );
-
-  return dailyData.slice(0, 5);
+  return getDailyForecast(data.list);
 }
