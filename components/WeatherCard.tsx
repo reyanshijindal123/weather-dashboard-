@@ -2,9 +2,8 @@ import { WeatherData } from "@/types/weather";
 import FavouriteButton from "./FavouriteButton";
 import { getWeatherIcon } from "@/app/helpers/weather-helper";
 import { formatTime } from "@/app/helpers/date-helper";
-import img from "next/image";
 import { formatVisibility } from "@/app/helpers/date-helper";
-
+import Image from "next/image";
 interface WeatherCardProps {
   weather: WeatherData;
 }
@@ -49,13 +48,12 @@ export default function WeatherCard({
           </div>
 
           {/* Weather Icon */}
-          <img
-            src={`https://openweathermap.org/img/wn/${weather.icon}@4x.png`}
-            alt={weather.description}
-            width={160}
-            height={160}
-            className="relative z-10"
-          />
+          <Image
+  src={`https://openweathermap.org/img/wn/${weather.icon}@4x.png`}
+  alt={weather.description}
+  width={160}
+  height={160}
+/>
         </div>
       </div>
 
