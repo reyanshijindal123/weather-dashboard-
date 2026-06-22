@@ -3,6 +3,7 @@ import { useState } from "react";
 import WeatherCard from "./WeatherCard";
 import UnitToggle from "./UnitToggle";
 import { WeatherData } from "@/types/weather";
+import { convertWeatherUnits } from "@/app/helpers/weather-helper";
 
 interface Props {
   weather: WeatherData;
@@ -11,16 +12,7 @@ interface Props {
 export default function WeatherCardClient({ weather }: Props) {
   const [unit, setUnit] = useState<"C" | "F">("C");
 
-  const convertedWeather = {
-    ...weather,
-
-    temperature:
-      unit === "F" ? (weather.temperature * 9) / 5 + 32 : weather.temperature,
-
-    feelsLike:
-      unit === "F" ? (weather.feelsLike * 9) / 5 + 32 : weather.feelsLike,
-  };
-
+const convertedWeather = convertWeatherUnits(weather,unit);
   return (
     <>
       <div className="mb-4 flex justify-end">

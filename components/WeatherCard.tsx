@@ -1,5 +1,8 @@
 import { WeatherData } from "@/types/weather";
 import FavouriteButton from "./FavouriteButton";
+import { getWeatherIcon } from "@/app/helpers/weather-helper";
+import { formatTime } from "@/app/helpers/date-helper";
+import Image from "next/image";
 
 interface WeatherCardProps {
   weather: WeatherData;
@@ -13,8 +16,9 @@ export default function WeatherCard({
 
   return (
     <div className="mt-8 rounded-[40px] bg-white/10 backdrop-blur-2xl border border-white/20 shadow-2xl p-8 text-white hover:scale-[1.02] transition-all duration-300">
-    
+      
       <div className="flex flex-col md:flex-row items-center justify-between">
+        
         <div>
           <p className="text-lg opacity-80">
             📍 {weather.city}
@@ -33,23 +37,29 @@ export default function WeatherCard({
           </p>
         </div>
 
-        <div className="flex flex-col items-center">
-          <div className="absoulutr h-40 w-40 rounded-full bg-white/20 blur-3xl">
-            {condition.includes("clear") && "☀️"}
-            {condition.includes("cloud") && "☁️"}
-            {condition.includes("rain") && "🌧️"}
-            {condition.includes("snow") && "❄️"}
+        <div className="relative flex flex-col items-center">
+          
+          {/* Glow Effect */}
+          <div className="absolute h-40 w-40 rounded-full bg-white/20 blur-3xl" />
+
+          {/* Emoji */}
+          <div className="relative z-10 text-6xl mb-2">
+            {getWeatherIcon(condition)}
           </div>
 
-          <img
+          {/* Weather Icon */}
+          <Image
             src={`https://openweathermap.org/img/wn/${weather.icon}@4x.png`}
             alt={weather.description}
-            className="h-40 w-40"
+            width={160}
+            height={160}
+            className="relative z-10"
           />
         </div>
       </div>
 
-      <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        
         <div className="rounded-2xl bg-white/10 p-4 text-center">
           <p className="opacity-70">
             Humidity
@@ -80,62 +90,52 @@ export default function WeatherCard({
           </p>
         </div>
 
-      <div className="rounded-2xl bg-white/10 p-4 text-center">
-  <p className="opacity-70">
-    Sunrise
-  </p>
+        <div className="rounded-2xl bg-white/10 p-4 text-center">
+          <p className="opacity-70">
+            Sunrise
+          </p>
 
-  <p className="mt-2 text-lg font-bold">
-    {new Date(
-      weather.sunrise * 1000
-    ).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    })}
-  </p>
-</div>
+          <p className="mt-2 text-lg font-bold">
+            {formatTime(weather.sunrise)}
+          </p>
+        </div>
 
-<div className="rounded-2xl bg-white/10 p-4 text-center">
-  <p className="opacity-70">
-    Sunset
-  </p>
+        <div className="rounded-2xl bg-white/10 p-4 text-center">
+          <p className="opacity-70">
+            Sunset
+          </p>
 
-  <p className="mt-2 text-lg font-bold">
-    {new Date(
-      weather.sunset * 1000
-    ).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    })}
-  </p>
-</div>  
-<div className="rounded-2xl bg-white/10 p-4 text-center">
-  <p className="opacity-70">
-    Pressure
-  </p>
+          <p className="mt-2 text-lg font-bold">
+            {formatTime(weather.sunset)}
+          </p>
+        </div>
 
-  <p className="mt-2 text-lg font-bold">
-    {weather.pressure} hPa
-  </p>
-</div>
+        <div className="rounded-2xl bg-white/10 p-4 text-center">
+          <p className="opacity-70">
+            Pressure
+          </p>
 
-<div className="rounded-2xl bg-white/10 p-4 text-center">
-  <p className="opacity-70">
-    Visibility
-  </p>
+          <p className="mt-2 text-lg font-bold">
+            {weather.pressure} hPa
+          </p>
+        </div>
 
-  <p className="mt-2 text-lg font-bold">
-    {weather.visibility} km
-  </p>
-</div>
+        <div className="rounded-2xl bg-white/10 p-4 text-center">
+          <p className="opacity-70">
+            Visibility
+          </p>
+
+          <p className="mt-2 text-lg font-bold">
+            {(weather.visibility / 1000).toFixed(1)} km
+          </p>
+        </div>
 
       </div>
 
       <div className="mt-8">
-        <FavouriteButton
-          city={weather.city}
-        />
+        <FavouriteButton city={weather.city} />
       </div>
+
     </div>
   );
 }
