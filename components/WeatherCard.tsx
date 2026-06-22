@@ -3,6 +3,7 @@ import FavouriteButton from "./FavouriteButton";
 import { getWeatherIcon } from "@/app/helpers/weather-helper";
 import { formatTime } from "@/app/helpers/date-helper";
 import Image from "next/image";
+import { formatVisibility } from "@/app/helpers/date-helper";
 
 interface WeatherCardProps {
   weather: WeatherData;
@@ -126,7 +127,7 @@ export default function WeatherCard({
           </p>
 
           <p className="mt-2 text-lg font-bold">
-            {(weather.visibility / 1000).toFixed(1)} km
+            {formatVisibility(weather.visibility)}
           </p>
         </div>
 

@@ -1,5 +1,5 @@
 import { getHourlyForecast } from "@/lib/weather";
-
+import { formatForecastDate } from "@/app/helpers/date-helper";
 interface Props {
   city: string;
 }
@@ -24,13 +24,7 @@ export default async function Forecast7Days({ city }: Props) {
           }) => (
             <div key={day.dt} className="flex items-center justify-between rounded-2xl bg-white/10 p-4 hover:bg-white/20 transition-all duration-300">
               <p>
-                {new Date(day.dt * 1000).toLocaleDateString("en-US", {
-                  day : '2-digit',
-                  month: '2-digit',
-                  weekday: "long",
-                  hour : '2-digit',
-                  minute : '2-digit',
-                })}
+                {formatForecastDate(day.dt)}
               </p>
 
               <div className="flex items-center gap-4">

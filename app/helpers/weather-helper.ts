@@ -1,5 +1,6 @@
 import { WeatherData } from "@/types/weather";
 
+
 export const getWeatherIcon = (
   condition: string
 ) => {
@@ -47,4 +48,16 @@ export const transformWeatherData = (
     pressure: data.main.pressure,
     visibility: data.visibility / 1000,
   };
+};
+
+export const getDailyForecast = (
+  forecastList: any[]
+) => {
+  return forecastList
+    .filter((item) =>
+      item.dt_txt.includes(
+        "12:00:00"
+      )
+    )
+    .slice(0, 5);
 };
