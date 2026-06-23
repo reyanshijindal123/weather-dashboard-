@@ -1,11 +1,9 @@
 import WeatherCardClient from "@/components/WeatherCardClient";
-import HourlyForecast from "@/components/HourlyForecast";
 import { getWeather } from "@/lib/weather";
 import { Suspense } from "react";
-import Forecast7Days from "@/components/Forecast7Days";
 import WeatherSkeleton from "@/components/WeatherSkeleton";
 import RecentSearches from "@/components/RecentSearch";
-
+import { getHourlyForecast } from "@/lib/weather";
 export default async function WeatherPage({
   params,
 }: {
@@ -16,6 +14,14 @@ export default async function WeatherPage({
   const { city } = await params;
 
   const weather = await getWeather(city);
+
+  const hourlyForecast= await getHourlyForecast(city);
+  const graphData = hourlyForecast?.list?.slice(0, 8).map((item: any) => ({
+  time: new Date(item.dt * 1000).getHours(),
+  temp: Math.round(item.main.temp),
+}));
+
+  
 
   const weatherDescription =
     weather.description.toLowerCase();
@@ -65,19 +71,15 @@ export default async function WeatherPage({
         <WeatherCardClient
           weather={weather}
         />
+       
 
         <RecentSearches />
 
-        <HourlyForecast
-          city={city}
-        />
-
+        
         <Suspense
           fallback={<WeatherSkeleton />}
         >
-          <Forecast7Days
-            city={city}
-          />
+          
         </Suspense>
       </div>
     </main>

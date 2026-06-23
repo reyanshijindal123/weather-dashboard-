@@ -61,3 +61,4 @@ export const getDailyForecast = (
     )
     .slice(0, 5);
 };
+
