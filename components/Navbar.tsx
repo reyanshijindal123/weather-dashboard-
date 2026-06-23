@@ -1,6 +1,6 @@
 import Link from "next/link";
 import CurrentLocationButton from "./CurrentLocationButton";
-
+import{Heart} from "lucide-react";
 export default function Navbar() {
   return (
     <nav
@@ -23,12 +23,12 @@ export default function Navbar() {
 
         {/* Buttons */}
         <div className="flex flex-wrap items-center gap-3">
-          <Link
-            href="/favorites"
-            className="rounded-xl border border-white/20 bg-white/20 px-4 py-2 text-white backdrop-blur-lg transition-all duration-300 hover:bg-white/30">
-            ❤️ Favorites
-          </Link>
-
+        <Link
+  href="/favorites"
+  className="flex items-center justify-center rounded-xl bg-white/10 p-2 hover:bg-white/20 transition-all"
+>
+  <Heart className="h-5 w-5 text-white" />
+</Link>  
           <CurrentLocationButton />
         </div>
       </div>

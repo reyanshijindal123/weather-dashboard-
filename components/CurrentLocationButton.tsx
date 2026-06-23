@@ -1,5 +1,5 @@
 "use client";
-
+import {MapPin} from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function CurrentLocationButton() {
@@ -47,13 +47,13 @@ export default function CurrentLocationButton() {
     );
   };
 
-  return (
-    <button
-      onClick={handleLocation}
-      className="flex items-center gap-2 rounded-xl bg-white/20 backdrop-blur-lg border border-white/20 px-4 py-2 text-white hover:bg-white/30 transition-all duration-300"
-    >
-    
-      <span>My Location 📍</span>
-    </button>
-  );
+ return (
+  <button
+    onClick={handleLocation}
+    className="flex items-center gap-2 rounded-xl bg-white/20 backdrop-blur-lg border border-white/20 px-4 py-2 text-white hover:bg-white/30 transition-all duration-300"
+  >
+    <MapPin className="h-4 w-4" />
+    <span>Current Location</span>
+  </button>
+);
 }
